@@ -1,0 +1,24 @@
+[package]
+name = "compress-epub"
+version = "0.1.0"
+edition = "2024"
+description = "A CLI for compressing EPUB files"
+license = "MIT"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+color_quant = "2.0.0"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+oxipng = { version = "10.2.1", default-features = false, features = ["parallel"] }
+png = "0.18.1"
+rayon = "1.12.0"
+webp = { version = "0.3.1", default-features = false }
+zip = { version = "6.0", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+tempfile = "3.23"
+
+# Image codecs are unusably slow unoptimized; keep debug/test builds fast.
+[profile.dev.package."*"]
+opt-level = 3
